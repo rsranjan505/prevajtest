@@ -13,6 +13,7 @@ class AbstractSimplecController extends AbstractController
     /** @var Request */
     protected $request;
     protected $requestStack;
+    protected $serializer;
 
     protected $security;
     public function __construct(Security $security, RequestStack $requestStack)
@@ -39,6 +40,10 @@ class AbstractSimplecController extends AbstractController
     public function getRequest()
     {
         return $this->requestStack->getCurrentRequest();
+    }
+
+    public function toJson($data){
+        return (array) $data;
     }
 
 }

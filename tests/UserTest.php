@@ -37,12 +37,18 @@ class UserTest extends KernelTestCase
          */
         public function test_user_record_created_in_database()
         {
+
+            $userRepo = $this->entityManager->getRepository(User::class);
+            $user = $userRepo->findOneBy(['email' => 'tom@gmail.com']);
+            if($user){
+                $this->entityManager->remove($user);
+                $this->entityManager->flush();
+            }
     
             $user = new User();
-    
             $user->setFirstName('tom');
             $user->setLastName('cruise');
-            $user->setEmail('tom@gmail.com');
+            $user->setEmail('tom2@gmail.com');
             $user->setCreatedAt(new \Datetime('now'));
             $user->setUpdatedAt(new \Datetime('now'));
     

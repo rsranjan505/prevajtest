@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Contact;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
@@ -75,4 +76,24 @@ class ContactRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findAll(): ?Array
+    {
+        return $this->createQueryBuilder('c')
+            ->setMaxResults(15)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findByName($value): ?Array
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.first_name LIKE :val')
+            ->setParameter('val', $value)
+            ->setMaxResults(15)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

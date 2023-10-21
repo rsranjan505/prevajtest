@@ -39,11 +39,6 @@ class EditController extends AbstractSimplecController
             
             if ($form->isSubmitted() && $form->isValid()) { 
                 
-                $contact->setName($form->get('name')->getData());
-                $contact->setMobile($form->get('mobile')->getData());
-                $contact->setEmail($form->get('email')->getData());
-                $contact->setCity($form->get('city')->getData());
-    
                $this->em->flush(); 
     
                return $this->redirectToRoute('app_contact');

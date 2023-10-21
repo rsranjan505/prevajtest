@@ -33,12 +33,19 @@ class ContactTest extends KernelTestCase
          */
         public function test_contact_record_created_in_database()
         {
+
+            //first check if exist
+            $contactRepo = $this->entityManager->getRepository(Contact::class);
+            $contact = $contactRepo->findOneBy(['name' => 'herry']);
+            if($contact){
+                $this->entityManager->remove($contact);
+                $this->entityManager->flush();
+            }
     
             $contact = new Contact();
-    
             $contact->setName('herry');
             $contact->setMobile('7004857557');
-            $contact->setEmail('contact@gmail.com');
+            $contact->setEmail('contact123@gmail.com');
             $contact->setCity('patna');
             $contact->setCreatedAt(new \Datetime('now'));
             $contact->setUpdatedAt(new \Datetime('now'));
